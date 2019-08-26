@@ -1,18 +1,17 @@
 package com.studyspringtest.knights;
 
-import com.studyspring.knights.BraveKnight;
-import com.studyspring.quest.Quest;
+import com.studySpring.entity.Knight;
 import org.junit.Test;
-
-import static org.mockito.Mockito.*;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class BraveKnightTest {
 
     @Test
     public void knightShouldEmbarkOnQuest(){
-        Quest mock = mock(Quest.class);
-        BraveKnight braveKnight = new BraveKnight(mock);
-        braveKnight.embarkOnQuest();
-        verify(mock,times(1)).embark();
+
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:knight.xml");
+        Knight knight = context.getBean(Knight.class);
+        knight.embarkOnQuest();
+        context.close();
     }
 }
